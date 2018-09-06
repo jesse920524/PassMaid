@@ -8,6 +8,6 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="ThemePassMaid" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="ThemePassMaid" parent="Theme.AppCompat.Light.NoActionBar" />
 
 </resources>
