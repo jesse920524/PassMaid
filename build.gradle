@@ -1,0 +1,40 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+apply from: "config.gradle"
+
+//1. download plugin block 下载插件模块
+buildscript {
+    
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.1.4'
+
+        classpath 'org.greenrobot:greendao-gradle-plugin:3.2.2' // add plugin
+//        classpath 'com.jakewharton:butterknife-gradle-plugin:8.8.1'
+//        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+        classpath 'com.jakewharton:butterknife-gradle-plugin:8.4.0'
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+
+//3.configuration for top-level and module project 为顶级project及module project配置
+//allprojects:配置细节(主项目,子项目)
+//所有项目都依赖于以下的中央仓库
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven { url "https://jitpack.io" }//brvah, rxPermissions
+        mavenCentral()//greenDAO
+    }
+}
+
+//自定义任务
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
