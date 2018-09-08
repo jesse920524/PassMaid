@@ -6,7 +6,7 @@
         android:supportsRtl="true"
         >
 
-        <activity android:name=".entrance.EntranceActivity">
+        <activity android:name=".entrance.view.EntranceActivity">
             <intent-filter>
                 <action
                     android:name="android.intent.action.MAIN"></action>

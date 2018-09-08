@@ -1,1 +1,1 @@
-include ':app', ':component_base', ':module_entrance', ':module_main', ':module_details', ':module_modify', ':module_about'
+include ':app', ':component_base', ':module_entrance', ':module_main', ':module_details', ':module_modify', ':module_about', ':module_search'

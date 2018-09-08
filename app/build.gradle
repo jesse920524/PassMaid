@@ -3,8 +3,12 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
     buildToolsVersion rootProject.ext.android.buildToolsVersion
+
+    /**
+     * defaultConfig是默认的配置，它是一个ProductFlavor。ProductFlavor允许我们根据不同的情况同时生成多个不同的apk包。
+     */
     defaultConfig {
-        applicationId rootProject.ext.android.applicationId
+        applicationId rootProject.ext.android.applicationId//配置包名,作为app的唯一标识
         minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode rootProject.ext.android.versionCode
@@ -12,17 +16,34 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
-//        signingConfigs {
-//            //签名配置
-//            release {
-//                keyAlias 'tome'
-//                keyPassword '455202'
-//                storeFile file('../frameKey.jks')
-//                storePassword '455202'
-//                v1SigningEnabled true
-//                v2SigningEnabled true
+
+        /**签名配置*/
+        signingConfigs {
+            //签名配置
+            release {
+                keyAlias 'tome'
+                keyPassword '455202'
+                storeFile file('../frameKey.jks')
+                storePassword '455202'
+                v1SigningEnabled true
+                v2SigningEnabled true
+            }
+        }
+
+        /**多渠道打包*/
+//        productFlavors{
+//            cutomize1{
+//                "applicationId" "dev.jessefu.passmaid"
+//
+//                buildConfigField "String", "BASE_URL", ""
+//            }
+//
+//            customize2{
+//                buildConfigField "String", "BASE_URL", ""
 //            }
 //        }
+        //自定义字段在BuildConfig
+        buildConfigField "String", "BASE_URL", "\"aa\""
 
         //MultiDex分包方法
         multiDexEnabled true
@@ -75,7 +96,7 @@ def releaseTime(){
 
 dependencies {
 
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation fileTree(include: ['*.jar'], dir: 'libs')//这样配置之后本地libs文件夹下的扩展名为jar的都会被依赖
     testImplementation rootProject.ext.dependencies["junit"]
     androidTestImplementation rootProject.ext.dependencies["runner"]
     androidTestImplementation rootProject.ext.dependencies["espresso_core"]
@@ -90,5 +111,6 @@ dependencies {
         implementation project(':module_entrance')
         implementation project(':module_main')
         implementation project(':module_modify')
+        implementation project(':module_search')
     }
 }

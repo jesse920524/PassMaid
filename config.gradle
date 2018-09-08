@@ -8,6 +8,7 @@ ext{
     moduleDetails = false
     moduleModify = false
     moduleAbout = false
+    moduleSearch = false
 
     android = [
             compileSdkVersion       :       28,

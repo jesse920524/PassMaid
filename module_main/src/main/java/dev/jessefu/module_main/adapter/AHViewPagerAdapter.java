@@ -1,8 +1,10 @@
 package dev.jessefu.module_main.adapter;
 
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.view.ViewGroup;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,11 +33,23 @@ public class AHViewPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int i) {
-        return null;
+        return fragmentList.get(i);
     }
 
     @Override
     public int getCount() {
-        return 0;
+        return fragmentList.size();
+    }
+
+    @Override
+    public void setPrimaryItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
+        if (getCurrentFragment() != object){
+            mCurrentFragment = (Fragment) object;
+        }
+        super.setPrimaryItem(container, position, object);
+    }
+
+    public Fragment getCurrentFragment() {
+        return mCurrentFragment;
     }
 }

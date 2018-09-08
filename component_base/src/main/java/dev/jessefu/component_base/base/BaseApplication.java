@@ -2,10 +2,14 @@ package dev.jessefu.component_base.base;
 
 import android.app.Application;
 import android.content.Context;
+import android.os.Build;
 import android.support.multidex.MultiDex;
+
+import com.alibaba.android.arouter.launcher.ARouter;
 
 import org.greenrobot.greendao.database.Database;
 
+import dev.jessefu.component_base.BuildConfig;
 import dev.jessefu.component_base.db.DaoMaster;
 import dev.jessefu.component_base.db.DaoSession;
 
@@ -35,8 +39,18 @@ public class BaseApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        initArouter();
         initGreenDao();
 
+    }
+
+    private void initArouter() {
+        if (BuildConfig.DEBUG){
+            ARouter.openDebug();
+            ARouter.openLog();
+        }
+
+        ARouter.init(this);
     }
 
     private void initGreenDao(){

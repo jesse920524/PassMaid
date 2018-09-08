@@ -21,7 +21,7 @@ public class FragmentMainFactory<T extends BaseFragment> {
         }else if (name.equals(SETTING)){
             fragment = (T) new SettingFragment();
         }else{
-            throw new IllegalStateException("");
+            throw new IllegalStateException("no such type fragment");
         }
         return fragment;
     }
