@@ -10,10 +10,24 @@ public final class ToastUtil {
 
     private static Toast mToast;
 
-    private static final Context mContext = BaseApplication.getContext();
+    private static Context mContext;
 
-    private ToastUtil(){
-        throw new AssertionError("could not instantiate this class");
+    private static volatile ToastUtil INSTANCE;
+
+    private ToastUtil(Context context){
+        mContext = context;
+//        throw new AssertionError("could not instantiate this class");
+    }
+
+    public static ToastUtil getInstance(Context context){
+        if (INSTANCE == null){
+            synchronized (ToastUtil.class){
+                if (INSTANCE == null){
+                    INSTANCE = new ToastUtil(context);
+                }
+            }
+        }
+        return INSTANCE;
     }
 
     public static void showShort(String msg){

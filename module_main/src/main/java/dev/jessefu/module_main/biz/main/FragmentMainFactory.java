@@ -15,14 +15,15 @@ public class FragmentMainFactory<T extends BaseFragment> {
     public static <T extends BaseFragment> T  create(String name){
         T fragment = null;
         if (name.equals(STAR)){
-            fragment = (T) new StarFragment();
+            fragment = (T) StarFragment.newInstance("");
         }else if (name.equals(CATEGORY)){
-            fragment = (T)new CategoryFragment();
+            fragment = (T)CategoryFragment.newInstance("");
         }else if (name.equals(SETTING)){
-            fragment = (T) new SettingFragment();
+            fragment = (T)SettingFragment.newInstance("");
         }else{
             throw new IllegalStateException("no such type fragment");
         }
         return fragment;
     }
+
 }

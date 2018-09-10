@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:title="收藏"
+        android:icon="@mipmap/ic_local_play_grey600_48dp"></item>
+
+    <item
+        android:title="分类"
+        android:icon="@mipmap/ic_storage_grey600_48dp"></item>
+
+    <item
+        android:title="设置"
+        android:icon="@mipmap/ic_settings_grey600_48dp"></item>
+</menu>

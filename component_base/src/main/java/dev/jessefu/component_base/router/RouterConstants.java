@@ -15,14 +15,14 @@ public final class RouterConstants {
     public static class ModuleMain{
         private static final String PATH = "/main/";
 
-        public static final String ACTIVITY_MAIN = "activity_main";
+        public static final String ACTIVITY_MAIN = PATH + "activity_main";
 
     }
 
     public static class ModuleAbout{
         private static final String PATH = "/about/";
 
-        public static final String ACTIVITY_ABOUT = "activity_about";
+        public static final String ACTIVITY_ABOUT = PATH + "activity_about";
     }
 
     public static class ModuleDetails{
@@ -33,7 +33,7 @@ public final class RouterConstants {
     public static class ModuleEntrance{
         private static final String PATH = "/entrance/";
 
-        public static final String ACTIVITY_ENTRANCE = "activity_entrance";
+        public static final String ACTIVITY_ENTRANCE = PATH + "activity_entrance";
     }
 
     public static class ModuleModify{
@@ -43,7 +43,7 @@ public final class RouterConstants {
     public static class ModuleSearch{
         private static final String PATH = "/search/";
 
-        public static final String ACTIVITY_SEARCH = "activity_search";
+        public static final String ACTIVITY_SEARCH = PATH + "activity_search";
     }
 
 }

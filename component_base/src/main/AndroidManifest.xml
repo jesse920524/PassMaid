@@ -1,2 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="dev.jessefu.component_base" />
+    package="dev.jessefu.component_base">
+    <application
+        android:name=".base.BaseApplication"
+        android:theme="@style/AppTheme"></application>
+</manifest>

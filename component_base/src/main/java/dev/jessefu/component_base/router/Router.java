@@ -31,6 +31,9 @@ public enum Router {
     /**module entrance section*/
 
     /**module main section*/
+    public void toMainActivity() {
+        mARouter.build(RouterConstants.ModuleMain.ACTIVITY_MAIN).navigation();
+    }
 
     /**module modify section*/
 
