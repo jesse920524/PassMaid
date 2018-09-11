@@ -3,14 +3,12 @@ package dev.jessefu.component_base.db.entity;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Index;
-import org.greenrobot.greendao.annotation.NotNull;
-import org.greenrobot.greendao.annotation.Unique;
 import org.greenrobot.greendao.annotation.Generated;
 
 import java.util.Objects;
 
 @Entity
-public class AcountEntity {
+public class AccountEntity {
 
     @Id
     private Long id;
@@ -26,8 +24,8 @@ public class AcountEntity {
 
     private String Category;
 
-    @Generated(hash = 753994555)
-    public AcountEntity(Long id, String account, String password,
+    @Generated(hash = 1133161483)
+    public AccountEntity(Long id, String account, String password,
             String description, boolean isStar, String Category) {
         this.id = id;
         this.account = account;
@@ -37,8 +35,8 @@ public class AcountEntity {
         this.Category = Category;
     }
 
-    @Generated(hash = 69783820)
-    public AcountEntity() {
+    @Generated(hash = 40307897)
+    public AccountEntity() {
     }
 
     public Long getId() {
@@ -92,7 +90,7 @@ public class AcountEntity {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("AcountEntity{");
+        final StringBuilder sb = new StringBuilder("AccountEntity{");
         sb.append("id=").append(id);
         sb.append(", account='").append(account).append('\'');
         sb.append(", password='").append(password).append('\'');
@@ -107,7 +105,7 @@ public class AcountEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        AcountEntity that = (AcountEntity) o;
+        AccountEntity that = (AccountEntity) o;
         return isStar == that.isStar &&
                 Objects.equals(id, that.id) &&
                 Objects.equals(account, that.account) &&

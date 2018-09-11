@@ -27,6 +27,9 @@ public final class RouterConstants {
 
     public static class ModuleDetails{
         private static final String PATH = "/details/";
+        public static final String ACTIVITY_DETAIL_BUNDLE_KEY = "activity_details_bundle_key";
+
+        public static final String ACTIVITY_DETAILS = PATH + "activity_details";
 
     }
 

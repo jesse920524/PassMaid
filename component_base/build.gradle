@@ -93,6 +93,26 @@ dependencies {
     annotationProcessor rootProject.ext.dependencies["dagger2-annotation-processor"]
     api rootProject.ext.dependencies["essentials"]
     api rootProject.ext.dependencies["ahBottomNav"]
+    api rootProject.ext.dependencies["textDrawable"]
+
+    /**architechture component aware section*/
+    def lifecycle_version = "1.1.1"
+    // ViewModel and LiveData
+    api "android.arch.lifecycle:extensions:$lifecycle_version"
+    // alternatively - just ViewModel
+    api "android.arch.lifecycle:viewmodel:$lifecycle_version" // use -ktx for Kotlin
+    // alternatively - just LiveData
+    api "android.arch.lifecycle:livedata:$lifecycle_version"
+    // alternatively - Lifecycles only (no ViewModel or LiveData).
+    // Support library depends on this lightweight import
+    api "android.arch.lifecycle:runtime:$lifecycle_version"
+
+    annotationProcessor "android.arch.lifecycle:compiler:$lifecycle_version"
+    // alternately - if using Java8, use the following instead of compiler
+    api "android.arch.lifecycle:common-java8:$lifecycle_version"
+
+    // optional - ReactiveStreams support for LiveData
+    api "android.arch.lifecycle:reactivestreams:$lifecycle_version"
 //    implementation 'com.android.support:appcompat-v7:28.0.0-rc02'
 //    testImplementation 'junit:junit:4.12'
 //    androidTestImplementation 'com.android.support.test:runner:1.0.2'

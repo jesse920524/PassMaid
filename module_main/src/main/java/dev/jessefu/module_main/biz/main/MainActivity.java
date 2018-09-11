@@ -22,9 +22,10 @@ import com.aurelhubert.ahbottomnavigation.AHBottomNavigationViewPager;
 import butterknife.BindView;
 import butterknife.OnClick;
 import dev.jessefu.component_base.base.BaseActivity;
+import dev.jessefu.component_base.db.entity.AccountEntity;
+import dev.jessefu.component_base.enums.Category;
 import dev.jessefu.component_base.router.Router;
 import dev.jessefu.component_base.router.RouterConstants;
-import dev.jessefu.component_base.util.ToastUtil;
 import dev.jessefu.module_main.R;
 import dev.jessefu.module_main.R2;
 import dev.jessefu.module_main.adapter.AHViewPagerAdapter;
@@ -56,7 +57,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        initViews();
+
     }
 
     @Override
@@ -71,14 +72,16 @@ public class MainActivity extends BaseActivity {
         initViewPager();
         initTabLayout();
         showFabAnim(1);
+        setTabLayoutVisibility(false);
 
     }
 
     private void initTabLayout() {
-        mTabLayout.addTab(mTabLayout.newTab().setText("社交"));
-        mTabLayout.addTab(mTabLayout.newTab().setText("生活"));
-        mTabLayout.addTab(mTabLayout.newTab().setText("购物"));
-        mTabLayout.addTab(mTabLayout.newTab().setText("游戏"));
+        mTabLayout.addTab(mTabLayout.newTab().setText("全部"));
+        for (Category category :
+                Category.values()) {
+            mTabLayout.addTab(mTabLayout.newTab().setText(category.getName()));
+        }
     }
 
     @Override
@@ -118,14 +121,16 @@ public class MainActivity extends BaseActivity {
                     case 0://starFragment
                         setFabVisibility(true);
                         showFabAnim(posDifference);
-
+                        setTabLayoutVisibility(false);
                         break;
                     case 1://categoryFragment
                         setFabVisibility(true);
                         showFabAnim(posDifference);
+                        setTabLayoutVisibility(true);
                         break;
                     case 2://settingFragment
                         setFabVisibility(false);
+                        setTabLayoutVisibility(false);
                         break;
                         default:
                             throw new IllegalStateException("invalid position");
@@ -157,7 +162,16 @@ public class MainActivity extends BaseActivity {
 
     @OnClick(R2.id.fab_main)
     public void onClickFab(View view){
-        ToastUtil.getInstance(this.getApplicationContext()).showShort("clicked fab");
+        /**test data*/
+        AccountEntity entity = new AccountEntity();
+        entity.setAccount("qq帐号");
+        entity.setCategory(Category.SOCIAL.getName());
+        entity.setAccount("276883319");
+        entity.setPassword("fantasy920524");
+        entity.setDescription("qq帐号,2005注册");
+        entity.setIsStar(true);
+
+        Router.INSTANCE.toDetailsActivity(entity);
     }
 
     /**
@@ -176,7 +190,13 @@ public class MainActivity extends BaseActivity {
         }
 
          ObjectAnimator.ofFloat(mFab, "rotation", 0, dstDegree)
-                .setDuration(750)
+                .setDuration(500)
                 .start();
     }
+
+    private void setTabLayoutVisibility(boolean visible){
+        mTabLayout.setVisibility(visible ? View.VISIBLE : View.GONE);
+    }
+
+
 }

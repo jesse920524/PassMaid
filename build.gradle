@@ -29,8 +29,13 @@ allprojects {
     repositories {
         google()
         jcenter()
-        maven { url "https://jitpack.io" }//brvah, rxPermissions
+        maven { url "https://jitpack.io"
+                }//brvah, rxPermissions
+        maven{
+            url 'http://dl.bintray.com/amulyakhare/maven'
+        }
         mavenCentral()//greenDAO
+
     }
 }
 

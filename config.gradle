@@ -77,8 +77,10 @@ ext{
             "dagger2-annotation-processor"     : 'com.google.dagger:dagger-compiler:2.16',
             //essentials
             "essentials"    : 'org.greenrobot:essentials:3.0.0-RC1',
-            //ahBottomNav
-            "ahBottomNav"   : 'com.aurelhubert:ahbottomnavigation:2.1.0'
+            //AhBottomNav
+            "ahBottomNav"   : 'com.aurelhubert:ahbottomnavigation:2.1.0',
+            //textDrawable https://github.com/amulyakhare/TextDrawable
+            "textDrawable"  : 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
 
 
     ]
