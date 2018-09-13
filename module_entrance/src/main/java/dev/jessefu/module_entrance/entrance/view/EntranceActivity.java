@@ -48,6 +48,11 @@ public class EntranceActivity extends BaseActivity{
 
     }
 
+    @Override
+    protected void initViewModel() {
+
+    }
+
     private void toMainActivity() {
         Observable.timer(1500, TimeUnit.MILLISECONDS)
                 .subscribeOn(Schedulers.io())

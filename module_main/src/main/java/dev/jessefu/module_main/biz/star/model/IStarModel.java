@@ -10,4 +10,6 @@ public interface IStarModel {
     Observable<List<AccountEntity>> getEntityList();
 
     void initTestData();
+
+    void clearTestData();
 }

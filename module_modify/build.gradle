@@ -29,7 +29,7 @@ android {
         }
 
         //强制前缀
-        resourcePrefix "about_"
+        resourcePrefix "modify_"
     }
 
     compileOptions {

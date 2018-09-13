@@ -31,19 +31,30 @@ public class StarModel extends BaseModel implements IStarModel{
 
     @Override
     public void initTestData() {
-        AccountEntity entity1 = new AccountEntity();
-        entity1.setAccount("qq");
-        entity1.setDescription("276883319");
-        entity1.setPassword("jesse");
-        entity1.setIsStar(true);
-        entity1.setCategory(Category.SOCIAL.getName());
+        if (mAccountEntityDao.queryBuilder().list().isEmpty()){
+            AccountEntity entity1 = new AccountEntity();
+            entity1.setTitle("qq");
+            entity1.setAccount("276883319");
+            entity1.setDescription("my qq number");
+            entity1.setPassword("jesse");
+            entity1.setIsStar(true);
+            entity1.setCategory(Category.SOCIAL.getName());
 
-        AccountEntity entity2 = new AccountEntity();
-        entity2.setAccount("坚果云");
-        entity2.setDescription("jesse920524@163.com");
-        entity2.setPassword("jesse dev2017");
-        entity2.setIsStar(true);
+            AccountEntity entity2 = new AccountEntity();
+            entity2.setTitle("坚果云");
+            entity2.setAccount("jesse920524@163.com");
+            entity2.setDescription("description");
+            entity2.setPassword("jesse dev2017");
+            entity2.setIsStar(true);
+            entity2.setCategory(Category.SOCIAL.getName());
 
-        mAccountEntityDao.insertInTx(entity1, entity2);
+            mAccountEntityDao.insertInTx(entity1, entity2);
+        }
+
+    }
+
+    @Override
+    public void clearTestData() {
+        mAccountEntityDao.deleteAll();
     }
 }

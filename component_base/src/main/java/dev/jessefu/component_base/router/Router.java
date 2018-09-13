@@ -49,6 +49,11 @@ public enum Router {
     }
 
     /**module modify section*/
+    public void toModifyActivity(AccountEntity accountEntity){
+        mARouter.build(RouterConstants.ModuleModify.ACTIVITY_MODIFY)
+                .withString(RouterConstants.ModuleModify.ACTIVITY_MODIFY_JSON, GsonUtil.getInstance().toJson(accountEntity))
+                .navigation();
+    }
 
     /**module search section*/
     public void toSearchActivity(){

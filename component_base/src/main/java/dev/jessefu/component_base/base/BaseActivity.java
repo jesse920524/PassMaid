@@ -21,6 +21,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         Router.INSTANCE.inject(this);
         initViews();
+        initViewModel();
         initData();
     }
 
@@ -39,4 +40,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     /**初始化Activity数据(request data from viewModel.)*/
     protected abstract void initData();
 
+    /**初始化viewModel*/
+    protected abstract void initViewModel();
 }

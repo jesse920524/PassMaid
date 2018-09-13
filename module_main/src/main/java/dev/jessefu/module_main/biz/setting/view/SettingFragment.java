@@ -32,6 +32,11 @@ public class SettingFragment extends BaseFragment {
     }
 
     @Override
+    protected void initViewModel() {
+
+    }
+
+    @Override
     protected void initData() {
 
     }

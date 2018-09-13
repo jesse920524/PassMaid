@@ -2,6 +2,8 @@ package dev.jessefu.module_main.adapter;
 
 import android.graphics.Color;
 import android.support.v4.app.ActivityCompat;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -47,6 +49,22 @@ public class RvStarAdapter extends BaseQuickAdapter<AccountEntity, RvStarAdapter
         TextDrawable textDrawable = TextDrawable.builder()
                 .buildRound(firstLetter, ActivityCompat.getColor(mContext, R.color.colorPrimary));
         helper.mIvAvatar.setImageDrawable(textDrawable);
+        helper.mIvSee.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()){
+                    case MotionEvent.ACTION_DOWN:
+                        Log.d(TAG, "onHover: down exec");
+                        helper.mTvPwd.setText(item.getPassword());
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        Log.d(TAG, "onHover: up exec");
+                        helper.mTvPwd.setText(pwdAsterisk.toString());
+                        break;
+                }
+                return true;
+            }
+        });
 
     }
 

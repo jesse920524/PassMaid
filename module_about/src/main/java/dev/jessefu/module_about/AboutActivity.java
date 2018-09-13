@@ -23,4 +23,9 @@ public class AboutActivity extends BaseActivity {
     protected void initData() {
 
     }
+
+    @Override
+    protected void initViewModel() {
+
+    }
 }

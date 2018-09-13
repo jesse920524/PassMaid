@@ -80,8 +80,14 @@ ext{
             //AhBottomNav
             "ahBottomNav"   : 'com.aurelhubert:ahbottomnavigation:2.1.0',
             //textDrawable https://github.com/amulyakhare/TextDrawable
-            "textDrawable"  : 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
+            "textDrawable"  : 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1',
+            //materialEditText  https://github.com/rengwuxian/MaterialEditText
+            "materialEditText"  : 'com.rengwuxian.materialedittext:library:2.1.4',
 
-
+            /**liveData section*/
+//            def lifecycle_version = "1.1.1"
+            "ViewModel&&LiveData"   : 'android.arch.lifecycle:extensions:1.1.1',
+            "lifecycle-annotation-processor"    : 'android.arch.lifecycle:compiler:1.1.1',
+            "reactive-stream-LiveData"      : 'android.arch.lifecycle:reactivestreams:1.1.1'
     ]
 }

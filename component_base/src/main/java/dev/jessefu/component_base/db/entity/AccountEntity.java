@@ -14,6 +14,8 @@ public class AccountEntity {
     private Long id;
 
     @Index(unique = true)
+    private String title;
+
     private String account;
 
     private String password;
@@ -24,10 +26,12 @@ public class AccountEntity {
 
     private String Category;
 
-    @Generated(hash = 1133161483)
-    public AccountEntity(Long id, String account, String password,
+
+    @Generated(hash = 1783461976)
+    public AccountEntity(Long id, String title, String account, String password,
             String description, boolean isStar, String Category) {
         this.id = id;
+        this.title = title;
         this.account = account;
         this.password = password;
         this.description = description;
@@ -38,6 +42,7 @@ public class AccountEntity {
     @Generated(hash = 40307897)
     public AccountEntity() {
     }
+
 
     public Long getId() {
         return this.id;
@@ -87,11 +92,39 @@ public class AccountEntity {
         this.Category = Category;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof AccountEntity)) return false;
+        AccountEntity entity = (AccountEntity) o;
+        return isStar == entity.isStar &&
+                Objects.equals(id, entity.id) &&
+                Objects.equals(title, entity.title) &&
+                Objects.equals(account, entity.account) &&
+                Objects.equals(password, entity.password) &&
+                Objects.equals(description, entity.description) &&
+                Objects.equals(Category, entity.Category);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(id, title, account, password, description, isStar, Category);
+    }
 
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("AccountEntity{");
         sb.append("id=").append(id);
+        sb.append(", title='").append(title).append('\'');
         sb.append(", account='").append(account).append('\'');
         sb.append(", password='").append(password).append('\'');
         sb.append(", description='").append(description).append('\'');
@@ -99,24 +132,5 @@ public class AccountEntity {
         sb.append(", Category='").append(Category).append('\'');
         sb.append('}');
         return sb.toString();
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        AccountEntity that = (AccountEntity) o;
-        return isStar == that.isStar &&
-                Objects.equals(id, that.id) &&
-                Objects.equals(account, that.account) &&
-                Objects.equals(password, that.password) &&
-                Objects.equals(description, that.description) &&
-                Objects.equals(Category, that.Category);
-    }
-
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(id, account, password, description, isStar, Category);
     }
 }

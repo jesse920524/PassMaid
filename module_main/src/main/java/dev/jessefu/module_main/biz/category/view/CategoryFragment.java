@@ -33,6 +33,11 @@ public class CategoryFragment extends BaseFragment {
     }
 
     @Override
+    protected void initViewModel() {
+
+    }
+
+    @Override
     protected void initData() {
 
     }

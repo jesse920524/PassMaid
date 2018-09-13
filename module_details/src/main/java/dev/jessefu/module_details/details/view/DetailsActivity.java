@@ -29,4 +29,9 @@ public class DetailsActivity extends BaseActivity {
     protected void initData() {
         Log.d(TAG, "initData: "  + json);
     }
+
+    @Override
+    protected void initViewModel() {
+
+    }
 }

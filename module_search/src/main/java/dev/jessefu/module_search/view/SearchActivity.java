@@ -34,4 +34,9 @@ public class SearchActivity extends BaseActivity {
     protected void initData() {
 
     }
+
+    @Override
+    protected void initViewModel() {
+
+    }
 }

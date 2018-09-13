@@ -1,2 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="dev.jessefu.module_modify" />
+    package="dev.jessefu.module_modify">
+
+    <application
+        android:theme="@style/AppTheme">
+        <activity android:name=".view.ModifyActivity"></activity>
+    </application>
+</manifest>

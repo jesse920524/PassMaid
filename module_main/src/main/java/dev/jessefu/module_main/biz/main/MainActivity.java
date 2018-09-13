@@ -89,6 +89,11 @@ public class MainActivity extends BaseActivity {
 
     }
 
+    @Override
+    protected void initViewModel() {
+
+    }
+
     private void initViewPager() {
         mViewPager.setPagingEnabled(false);//禁止滑动
         mViewPager.setOffscreenPageLimit(4);
@@ -162,16 +167,7 @@ public class MainActivity extends BaseActivity {
 
     @OnClick(R2.id.fab_main)
     public void onClickFab(View view){
-        /**test data*/
-        AccountEntity entity = new AccountEntity();
-        entity.setAccount("qq帐号");
-        entity.setCategory(Category.SOCIAL.getName());
-        entity.setAccount("276883319");
-        entity.setPassword("fantasy920524");
-        entity.setDescription("qq帐号,2005注册");
-        entity.setIsStar(true);
-
-        Router.INSTANCE.toDetailsActivity(entity);
+        Router.INSTANCE.toModifyActivity(null);
     }
 
     /**

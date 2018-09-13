@@ -41,6 +41,10 @@ public final class RouterConstants {
 
     public static class ModuleModify{
         private static final String PATH = "/modify/";
+
+        public static final String ACTIVITY_MODIFY_JSON = "activity_modify_json";
+        public static final String ACTIVITY_MODIFY = PATH + "activity_modify";
+
     }
 
     public static class ModuleSearch{
