@@ -8,7 +8,8 @@ public enum Category {
     LIFE("生活"),
     SHOPPING("购物"),
     GAME("游戏"),
-    WORK("工作");
+    WORK("工作"),
+    OTHER("其他");
 
     private String name;
 

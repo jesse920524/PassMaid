@@ -9,17 +9,23 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.List;
 
 import butterknife.BindView;
 import dev.jessefu.component_base.base.BaseFragment;
 import dev.jessefu.component_base.db.entity.AccountEntity;
+import dev.jessefu.component_base.event.RefreshDataEvent;
 import dev.jessefu.component_base.router.Router;
 import dev.jessefu.module_main.R;
 import dev.jessefu.module_main.R2;
@@ -44,6 +50,28 @@ public class StarFragment extends BaseFragment {
     private RvStarAdapter mAdapter;
 
     private StarVM mViewModel;
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.d(TAG, "onStart: exec");
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.d(TAG, "onStop: exec");
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mViewModel.clearTestData();
+    }
+
+
 
     @Override
     protected int provideLayoutRes() {
@@ -82,9 +110,10 @@ public class StarFragment extends BaseFragment {
         });
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        mViewModel.clearTestData();
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
+    public void onEventRefresh(RefreshDataEvent event){
+        Log.d(TAG, "onEventRefresh: exec");
+        mViewModel.start();
+
     }
 }

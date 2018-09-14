@@ -6,6 +6,7 @@ import android.util.Log;
 
 import dev.jessefu.component_base.base.BaseViewModel;
 import dev.jessefu.component_base.db.entity.AccountEntity;
+import dev.jessefu.component_base.router.Router;
 import dev.jessefu.module_modify.model.ModifyModel;
 import io.reactivex.functions.Consumer;
 
@@ -24,6 +25,7 @@ public class ModifyVM extends BaseViewModel<ModifyModel> {
     }
 
     public ModifyVM(){
+        model = new ModifyModel();
         liveDataFinish = new MutableLiveData<>();
         liveDataFinish.setValue(false);
     }
@@ -33,9 +35,11 @@ public class ModifyVM extends BaseViewModel<ModifyModel> {
     }
 
     public boolean checkValidate(){
+        // TODO: 2018-09-14 验证数据格式合法
         return true;
     }
 
+    /**提交了修改数据的请求,检验数据格式合法性后,更新db*/
     public void submitData(@NonNull String title,
                            @NonNull String account,
                            String pwd,
@@ -59,10 +63,11 @@ public class ModifyVM extends BaseViewModel<ModifyModel> {
                 .subscribe(new Consumer<Boolean>() {
                     @Override
                     public void accept(Boolean aBoolean) throws Exception {
-//                        liveDataFinish.setValue(true);
+                        liveDataFinish.setValue(true);
                         Log.d(TAG, "accept: " + entity);
                     }
                 });
+//        Router.INSTANCE.toMainActivity();
     }
 
 

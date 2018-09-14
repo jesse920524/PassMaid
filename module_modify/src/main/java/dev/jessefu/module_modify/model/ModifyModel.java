@@ -22,12 +22,8 @@ public class ModifyModel extends BaseModel {
      * 判断依据：entity.Id()是否为null
      * */
     public Observable<Boolean> insertOrUpdateEntity(AccountEntity entity){
+        mAccountEntityDao.insertOrReplace(entity);
 
-       if (entity.getId() == null){//insert
-            mAccountEntityDao.insert(entity);
-       }else{//update
-            mAccountEntityDao.update(entity);
-       }
 
        return Observable.just(true)
                .compose(RxTransformer.switchSchedulers());

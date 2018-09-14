@@ -23,8 +23,8 @@
                 />
             <ImageView
                 android:id="@+id/iv_item_star_avatar"
-                android:layout_width="56dp"
-                android:layout_height="56dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:layout_centerVertical="true"
                 android:layout_margin="12dp"
                 />
@@ -38,9 +38,10 @@
                 android:textSize="18sp"
                 android:maxLines="1"
                 android:layout_alignTop="@id/iv_item_star_avatar"
-                android:layout_toRightOf="@id/iv_item_star_avatar"/>
+                android:layout_toRightOf="@id/iv_item_star_avatar"
+                android:layout_marginTop="-10dp"/>
             <TextView
-                android:id="@+id/tv_item_star_description"
+                android:id="@+id/tv_item_star_account"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="test description"
@@ -57,7 +58,7 @@
                 android:textColor="@color/grey_500"
                 android:textSize="14sp"
                 android:maxLines="1"
-                android:layout_below="@id/tv_item_star_description"
+                android:layout_below="@id/tv_item_star_account"
                 android:layout_toRightOf="@id/iv_item_star_avatar"/>
 
         </RelativeLayout>

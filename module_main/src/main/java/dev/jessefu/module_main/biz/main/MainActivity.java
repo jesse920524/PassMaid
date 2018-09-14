@@ -2,6 +2,7 @@ package dev.jessefu.module_main.biz.main;
 
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -19,11 +20,14 @@ import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationAdapter;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationViewPager;
 
+import org.greenrobot.eventbus.EventBus;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 import dev.jessefu.component_base.base.BaseActivity;
 import dev.jessefu.component_base.db.entity.AccountEntity;
 import dev.jessefu.component_base.enums.Category;
+import dev.jessefu.component_base.event.RefreshDataEvent;
 import dev.jessefu.component_base.router.Router;
 import dev.jessefu.component_base.router.RouterConstants;
 import dev.jessefu.module_main.R;
@@ -57,7 +61,14 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
 
+    /**ModifyActivity成功修改/新增数据后会调用该方法,发送Event给所有列表呈现页Fragment,刷新数据*/
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        Log.d(TAG, "onNewIntent: exec");
+        EventBus.getDefault().postSticky(RefreshDataEvent.newInstance(""));
     }
 
     @Override
@@ -91,7 +102,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initViewModel() {
-
+        //no viewModel
     }
 
     private void initViewPager() {

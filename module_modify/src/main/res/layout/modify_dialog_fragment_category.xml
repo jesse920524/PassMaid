@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:padding="25dp">
+
+    <RadioGroup
+        android:id="@+id/rg_modify"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:checkedButton="@id/rb_modify_social">
+        <RadioButton
+            android:id="@+id/rb_modify_social"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="社交"/>
+        <RadioButton
+            android:id="@+id/rb_modify_life"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="生活"
+            />
+        <RadioButton
+            android:id="@+id/rb_modify_shopping"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="购物"/>
+        <RadioButton
+            android:id="@+id/rb_modify_game"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="游戏"/>
+        <RadioButton
+            android:id="@+id/rb_modify_work"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="工作"/>
+        <RadioButton
+            android:id="@+id/rb_modify_other"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="其他"/>
+
+    </RadioGroup>
+</LinearLayout>

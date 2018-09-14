@@ -34,8 +34,8 @@ public class RvStarAdapter extends BaseQuickAdapter<AccountEntity, RvStarAdapter
 
     @Override
     protected void convert(RvStarViewHolder helper, AccountEntity item) {
-        helper.mTvTitle.setText(item.getAccount());
-        helper.mTvDescription.setText(item.getDescription());
+        helper.mTvTitle.setText(item.getTitle());
+        helper.mTvAccount.setText(item.getAccount());
 
         StringBuilder pwdAsterisk = new StringBuilder();
         for (int i=0; i<item.getPassword().length(); i++){
@@ -44,21 +44,20 @@ public class RvStarAdapter extends BaseQuickAdapter<AccountEntity, RvStarAdapter
         helper.mTvPwd.setText(pwdAsterisk.toString());
 
         /**textDrawable*/
-        char[] chars = item.getAccount().toCharArray();
+        char[] chars = item.getTitle().toCharArray();
         String firstLetter = String.valueOf(chars[0]);
         TextDrawable textDrawable = TextDrawable.builder()
                 .buildRound(firstLetter, ActivityCompat.getColor(mContext, R.color.colorPrimary));
         helper.mIvAvatar.setImageDrawable(textDrawable);
+
         helper.mIvSee.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getAction()){
                     case MotionEvent.ACTION_DOWN:
-                        Log.d(TAG, "onHover: down exec");
                         helper.mTvPwd.setText(item.getPassword());
                         break;
                     case MotionEvent.ACTION_UP:
-                        Log.d(TAG, "onHover: up exec");
                         helper.mTvPwd.setText(pwdAsterisk.toString());
                         break;
                 }
@@ -71,8 +70,8 @@ public class RvStarAdapter extends BaseQuickAdapter<AccountEntity, RvStarAdapter
     protected static class RvStarViewHolder extends BaseViewHolder{
         @BindView(R2.id.tv_item_star_title)
         TextView mTvTitle;
-        @BindView(R2.id.tv_item_star_description)
-        TextView mTvDescription;
+        @BindView(R2.id.tv_item_star_account)
+        TextView mTvAccount;
         @BindView(R2.id.tv_item_star_pwd)
         TextView mTvPwd;
         @BindView(R2.id.iv_item_star_avatar)
