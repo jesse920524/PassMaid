@@ -21,18 +21,22 @@ import com.aurelhubert.ahbottomnavigation.AHBottomNavigationAdapter;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationViewPager;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import dev.jessefu.component_base.base.BaseActivity;
 import dev.jessefu.component_base.db.entity.AccountEntity;
 import dev.jessefu.component_base.enums.Category;
+import dev.jessefu.component_base.event.InitTabEvent;
 import dev.jessefu.component_base.event.RefreshDataEvent;
 import dev.jessefu.component_base.router.Router;
 import dev.jessefu.component_base.router.RouterConstants;
 import dev.jessefu.module_main.R;
 import dev.jessefu.module_main.R2;
 import dev.jessefu.module_main.adapter.AHViewPagerAdapter;
+import dev.jessefu.module_main.biz.category.view.CategoryChildFragment;
+import dev.jessefu.module_main.biz.category.view.CategoryFragment;
 
 @Route(path = RouterConstants.ModuleMain.ACTIVITY_MAIN)
 public class MainActivity extends BaseActivity {
@@ -63,6 +67,18 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
     /**ModifyActivity成功修改/新增数据后会调用该方法,发送Event给所有列表呈现页Fragment,刷新数据*/
     @Override
     protected void onNewIntent(Intent intent) {
@@ -81,18 +97,20 @@ public class MainActivity extends BaseActivity {
         initToolbar();
         initBottomNav();
         initViewPager();
-        initTabLayout();
+//        initTabLayout();
         showFabAnim(1);
         setTabLayoutVisibility(false);
 
     }
 
     private void initTabLayout() {
-        mTabLayout.addTab(mTabLayout.newTab().setText("全部"));
-        for (Category category :
-                Category.values()) {
-            mTabLayout.addTab(mTabLayout.newTab().setText(category.getName()));
-        }
+//        mTabLayout.addTab(mTabLayout.newTab().setText("全部"));
+//        for (Category category :
+//                Category.values()) {
+//            mTabLayout.addTab(mTabLayout.newTab().setText(category.getName()));
+//        }
+        CategoryFragment fragment = (CategoryFragment) mViewPagerAdapter.getItem(1);
+        mTabLayout.setupWithViewPager(fragment.getViewPager());
     }
 
     @Override
@@ -205,5 +223,10 @@ public class MainActivity extends BaseActivity {
         mTabLayout.setVisibility(visible ? View.VISIBLE : View.GONE);
     }
 
+    @Subscribe
+    public void onEventInitTabs(InitTabEvent event){
+        Log.d(TAG, "onEventInitTabs: exec");
+        initTabLayout();
+    }
 
 }
