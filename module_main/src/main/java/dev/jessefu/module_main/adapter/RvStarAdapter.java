@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.amulyakhare.textdrawable.TextDrawable;
+import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -46,8 +47,10 @@ public class RvStarAdapter extends BaseQuickAdapter<AccountEntity, RvStarAdapter
         /**textDrawable*/
         char[] chars = item.getTitle().toCharArray();
         String firstLetter = String.valueOf(chars[0]);
+
+        ColorGenerator colorGenerator = ColorGenerator.MATERIAL;
         TextDrawable textDrawable = TextDrawable.builder()
-                .buildRound(firstLetter, ActivityCompat.getColor(mContext, R.color.colorPrimary));
+                .buildRound(firstLetter, ActivityCompat.getColor(mContext, colorGenerator.getRandomColor()));
         helper.mIvAvatar.setImageDrawable(textDrawable);
 
         helper.mIvSee.setOnTouchListener(new View.OnTouchListener() {
