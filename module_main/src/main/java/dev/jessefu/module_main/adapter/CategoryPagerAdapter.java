@@ -8,7 +8,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-import dev.jessefu.component_base.enums.Category;
+import dev.jessefu.component_base.enums.DefaultCategory;
 import dev.jessefu.module_main.biz.category.FragmentCategoryChildFactory;
 
 public class CategoryPagerAdapter extends FragmentPagerAdapter {
@@ -25,10 +25,10 @@ public class CategoryPagerAdapter extends FragmentPagerAdapter {
 
         fragmentList.add(FragmentCategoryChildFactory.create("全部"));
         titleList.add("全部");
-        for (Category category :
-                Category.values()) {
-            fragmentList.add(FragmentCategoryChildFactory.create(category.getName()));
-            titleList.add(category.getName());
+        for (DefaultCategory defaultCategory :
+                DefaultCategory.values()) {
+            fragmentList.add(FragmentCategoryChildFactory.create(defaultCategory.getName()));
+            titleList.add(defaultCategory.getName());
         }
     }
 

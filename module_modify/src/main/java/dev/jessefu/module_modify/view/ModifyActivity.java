@@ -3,9 +3,11 @@ package dev.jessefu.module_modify.view;
 import android.annotation.SuppressLint;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.DialogInterface;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
@@ -20,6 +22,8 @@ import com.rengwuxian.materialedittext.MaterialEditText;
 import butterknife.BindView;
 import butterknife.OnClick;
 import dev.jessefu.component_base.base.BaseActivity;
+import dev.jessefu.component_base.db.entity.AccountEntity;
+import dev.jessefu.component_base.json.GsonFactory;
 import dev.jessefu.component_base.router.Router;
 import dev.jessefu.component_base.router.RouterConstants;
 import dev.jessefu.module_modify.R;
@@ -56,6 +60,7 @@ public class ModifyActivity extends BaseActivity {
 
     private ModifyVM mViewModel;
 
+    private AccountEntity mEntity;
     @Override
     protected int getLayoutRes() {
         return R.layout.modify_activity_modify;
@@ -65,6 +70,17 @@ public class ModifyActivity extends BaseActivity {
     protected void initViews() {
         Log.d(TAG, "initViews: " + jsonAccountEntity);
         manageFABVisibility();
+
+        if (!jsonAccountEntity.equals("null")){
+            mEntity = GsonFactory.get().fromJson(jsonAccountEntity, AccountEntity.class);
+
+            mEtTitle.setText(mEntity.getTitle());
+            mEtAccount.setText(mEntity.getAccount());
+            mEtPwd.setText(mEntity.getPassword());
+            mEtDescription.setText(mEntity.getDescription());
+            mTvCategory.setText(mEntity.getCategory());
+            mCheckBox.setChecked(mEntity.getIsStar());
+        }
     }
 
     /**根据Intent收到的参数,控制fab的显示/隐藏*/
@@ -126,5 +142,28 @@ public class ModifyActivity extends BaseActivity {
                 mCheckBox.isChecked(),
                 mTvCategory.getText().toString()
                 );
+    }
+
+    @OnClick(R2.id.fab_modify)
+    public void onClickFab(View view){
+        showAlert();
+    }
+
+    private void showAlert() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("删除 \r" + mEntity.getTitle() + "?");
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                mViewModel.deleteData(mEntity);
+            }
+        });
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.show();
     }
 }

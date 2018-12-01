@@ -26,8 +26,6 @@ import org.greenrobot.eventbus.Subscribe;
 import butterknife.BindView;
 import butterknife.OnClick;
 import dev.jessefu.component_base.base.BaseActivity;
-import dev.jessefu.component_base.db.entity.AccountEntity;
-import dev.jessefu.component_base.enums.Category;
 import dev.jessefu.component_base.event.InitTabEvent;
 import dev.jessefu.component_base.event.RefreshDataEvent;
 import dev.jessefu.component_base.router.Router;
@@ -35,7 +33,6 @@ import dev.jessefu.component_base.router.RouterConstants;
 import dev.jessefu.module_main.R;
 import dev.jessefu.module_main.R2;
 import dev.jessefu.module_main.adapter.AHViewPagerAdapter;
-import dev.jessefu.module_main.biz.category.view.CategoryChildFragment;
 import dev.jessefu.module_main.biz.category.view.CategoryFragment;
 
 @Route(path = RouterConstants.ModuleMain.ACTIVITY_MAIN)
@@ -104,11 +101,7 @@ public class MainActivity extends BaseActivity {
     }
 
     private void initTabLayout() {
-//        mTabLayout.addTab(mTabLayout.newTab().setText("全部"));
-//        for (Category category :
-//                Category.values()) {
-//            mTabLayout.addTab(mTabLayout.newTab().setText(category.getName()));
-//        }
+
         CategoryFragment fragment = (CategoryFragment) mViewPagerAdapter.getItem(1);
         mTabLayout.setupWithViewPager(fragment.getViewPager());
     }

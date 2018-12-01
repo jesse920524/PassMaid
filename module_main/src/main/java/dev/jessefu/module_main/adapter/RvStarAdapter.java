@@ -50,7 +50,7 @@ public class RvStarAdapter extends BaseQuickAdapter<AccountEntity, RvStarAdapter
 
         ColorGenerator colorGenerator = ColorGenerator.MATERIAL;
         TextDrawable textDrawable = TextDrawable.builder()
-                .buildRound(firstLetter, ActivityCompat.getColor(mContext, colorGenerator.getRandomColor()));
+                .buildRound(firstLetter, colorGenerator.getRandomColor());
         helper.mIvAvatar.setImageDrawable(textDrawable);
 
         helper.mIvSee.setOnTouchListener(new View.OnTouchListener() {

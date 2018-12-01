@@ -1,7 +1,8 @@
 package dev.jessefu.component_base.enums;
 /**
  * 代表帐号种类*/
-public enum Category {
+
+public enum DefaultCategory {
 
 //    ALL("全部"),
     SOCIAL("社交"),
@@ -13,7 +14,7 @@ public enum Category {
 
     private String name;
 
-    Category(String name){
+    DefaultCategory(String name){
         this.name = name;
     }
 

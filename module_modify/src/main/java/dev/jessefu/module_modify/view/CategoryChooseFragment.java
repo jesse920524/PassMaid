@@ -9,14 +9,12 @@ import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnCheckedChanged;
-import dev.jessefu.component_base.enums.Category;
+import dev.jessefu.component_base.enums.DefaultCategory;
 import dev.jessefu.module_modify.R;
 import dev.jessefu.module_modify.R2;
 
@@ -92,17 +90,17 @@ public class CategoryChooseFragment extends DialogFragment {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 String categoryName = null;
                 if (checkedId == R.id.rb_modify_social){
-                    categoryName = Category.SOCIAL.getName();
+                    categoryName = DefaultCategory.SOCIAL.getName();
                 }else if (checkedId == R.id.rb_modify_life){
-                    categoryName = Category.LIFE.getName();
+                    categoryName = DefaultCategory.LIFE.getName();
                 }else if (checkedId == R.id.rb_modify_shopping){
-                    categoryName = Category.SHOPPING.getName();
+                    categoryName = DefaultCategory.SHOPPING.getName();
                 }else if (checkedId == R.id.rb_modify_game){
-                    categoryName = Category.GAME.getName();
+                    categoryName = DefaultCategory.GAME.getName();
                 }else if (checkedId == R.id.rb_modify_work){
-                    categoryName = Category.WORK.getName();
+                    categoryName = DefaultCategory.WORK.getName();
                 }else if (checkedId == R.id.rb_modify_other){
-                    categoryName = Category.OTHER.getName();
+                    categoryName = DefaultCategory.OTHER.getName();
                 }else{
                     throw new IllegalArgumentException("no such fucking category");
                 }

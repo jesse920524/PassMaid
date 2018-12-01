@@ -129,7 +129,7 @@ public class AccountEntity {
         sb.append(", password='").append(password).append('\'');
         sb.append(", description='").append(description).append('\'');
         sb.append(", isStar=").append(isStar);
-        sb.append(", Category='").append(Category).append('\'');
+        sb.append(", DefaultCategory='").append(Category).append('\'');
         sb.append('}');
         return sb.toString();
     }

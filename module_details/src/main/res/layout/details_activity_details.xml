@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <ImageView
-                android:id="@+id/iv_details"
+                android:id="@+id/iv_details_back"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_centerVertical="true"
@@ -28,7 +28,7 @@
                 android:text=""
                 android:textSize="18sp"
                 android:textColor="@color/white"
-                android:layout_toRightOf="@id/iv_details"
+                android:layout_toRightOf="@id/iv_details_back"
                 android:layout_marginLeft="12dp"/>
 
 
@@ -49,9 +49,10 @@
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="6dp"
+                app:cardCornerRadius="4dp"
                 android:layout_margin="5dp"
                 >
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
@@ -70,12 +71,14 @@
                         android:layout_height="1dp"
                         android:background="#e8e8e8"
                         android:layout_below="@id/tv_details_title"/>
-                    
+
+                    <!--account-->
                     <RelativeLayout
                         android:id="@+id/rl_details_account"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
-                        android:layout_below="@id/iv_details_divider_title">
+                        android:layout_below="@id/iv_details_divider_title"
+                        android:layout_marginTop="12dp">
                         
                         <ImageView
                             android:id="@+id/iv_details_account"
@@ -104,6 +107,7 @@
                             android:layout_toRightOf="@id/iv_details_account"/>
                     </RelativeLayout>
 
+                    <!--pwd-->
                     <RelativeLayout
                         android:id="@+id/rl_details_pwd"
                         android:layout_width="match_parent"
@@ -117,17 +121,72 @@
                             android:src="@mipmap/ic_assignment_grey600_48dp"
                             android:layout_marginLeft="12dp"
                             android:layout_marginRight="12dp"
+                            android:layout_centerVertical="true" />
+
+                        <TextView
+                            android:id="@+id/tv_details_pwd_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="密码"
+                            android:textSize="12sp"
+                            android:layout_margin="4dp"
+                            android:layout_toRightOf="@id/iv_details_pwd"/>
+
+                        <TextView
+                            android:id="@+id/tv_details_pwd"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="******"
+                            android:layout_toRightOf="@id/iv_details_pwd"
+                            android:layout_below="@id/tv_details_pwd_text"/>
+                    </RelativeLayout>
+
+                    <!--defaultCategory-->
+                    <RelativeLayout
+                        android:id="@+id/rl_details_category"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_below="@id/rl_details_pwd"
+                        android:layout_marginBottom="12dp"
+                        >
+
+                        <ImageView
+                            android:id="@+id/iv_details_category"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src="@mipmap/ic_storage_grey600_48dp"
                             android:layout_centerVertical="true"
+                            android:layout_marginLeft="12dp"
+                            android:layout_marginRight="12dp"
                             />
+
+                        <TextView
+                            android:id="@+id/tv_details_category_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="分类"
+                            android:textSize="12sp"
+                            android:layout_toRightOf="@id/iv_details_category"
+                            android:layout_margin="4dp"/>
+
+                        <TextView
+                            android:id="@+id/tv_details_category"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="生活"
+                            android:layout_toRightOf="@id/iv_details_category"
+                            android:layout_below="@id/tv_details_category_text"/>
                     </RelativeLayout>
                 </RelativeLayout>
+
+
             </android.support.v7.widget.CardView>
 
             <!--descrption card-->
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="6dp"
+                app:cardCornerRadius="4dp"
                 android:layout_margin="5dp">
 
                 <RelativeLayout
@@ -160,6 +219,19 @@
                         android:padding="10dp"/>
                 </RelativeLayout>
             </android.support.v7.widget.CardView>
+
+
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:useCompatPadding="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="48dp"
+        android:src="@mipmap/ic_create_white_48dp"
+        app:fabSize="normal"
+        android:visibility="visible"/>
 </RelativeLayout>

@@ -11,8 +11,8 @@
                 <action
                     android:name="android.intent.action.MAIN"></action>
 
-                <category
-                    android:name="android.intent.category.DEFAULT"></category>
+                <defaultCategory
+                    android:name="android.intent.defaultCategory.DEFAULT"></defaultCategory>
             </intent-filter>
         </activity>
     </application>

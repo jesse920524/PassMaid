@@ -67,8 +67,16 @@ public class ModifyVM extends BaseViewModel<ModifyModel> {
                         Log.d(TAG, "accept: " + entity);
                     }
                 });
-//        Router.INSTANCE.toMainActivity();
     }
 
 
+    public void deleteData(AccountEntity entity) {
+        model.deleteEntity(entity)
+                .subscribe(new Consumer<Boolean>() {
+                    @Override
+                    public void accept(Boolean aBoolean) throws Exception {
+                        liveDataFinish.setValue(aBoolean);
+                    }
+                });
+    }
 }

@@ -6,7 +6,7 @@ import dev.jessefu.component_base.base.BaseApplication;
 import dev.jessefu.component_base.base.BaseModel;
 import dev.jessefu.component_base.db.AccountEntityDao;
 import dev.jessefu.component_base.db.entity.AccountEntity;
-import dev.jessefu.component_base.enums.Category;
+import dev.jessefu.component_base.enums.DefaultCategory;
 import dev.jessefu.component_base.util.RxTransformer;
 import io.reactivex.Observable;
 
@@ -38,7 +38,7 @@ public class StarModel extends BaseModel implements IStarModel{
             entity1.setDescription("my qq number");
             entity1.setPassword("jesse");
             entity1.setIsStar(true);
-            entity1.setCategory(Category.SOCIAL.getName());
+            entity1.setCategory(DefaultCategory.SOCIAL.getName());
 
             AccountEntity entity2 = new AccountEntity();
             entity2.setTitle("坚果云");
@@ -46,7 +46,7 @@ public class StarModel extends BaseModel implements IStarModel{
             entity2.setDescription("description");
             entity2.setPassword("jesse dev2017");
             entity2.setIsStar(true);
-            entity2.setCategory(Category.SOCIAL.getName());
+            entity2.setCategory(DefaultCategory.SOCIAL.getName());
 
             mAccountEntityDao.insertInTx(entity1, entity2);
         }

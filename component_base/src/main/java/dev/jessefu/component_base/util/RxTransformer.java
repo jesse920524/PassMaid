@@ -12,9 +12,9 @@ import io.reactivex.schedulers.Schedulers;
 public class RxTransformer<T> {
 
     public static <T> ObservableTransformer<T, T> switchSchedulers(){
-        return new ObservableTransformer() {
+        return new ObservableTransformer<T, T>() {
             @Override
-            public ObservableSource apply(Observable upstream) {
+            public ObservableSource<T> apply(Observable<T> upstream) {
                 return upstream
                         .subscribeOn(Schedulers.io())
                         .unsubscribeOn(Schedulers.io())

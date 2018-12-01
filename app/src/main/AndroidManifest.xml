@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="dev.jessefu.passmaid">
 
+    <uses-permission android:name="android.permission.USE_FINGERPRINT"></uses-permission>
     <application
         android:name="dev.jessefu.component_base.base.BaseApplication"
         android:allowBackup="true"
