@@ -13,8 +13,8 @@ import dev.jessefu.component_base.BuildConfig;
 import dev.jessefu.component_base.db.DaoMaster;
 import dev.jessefu.component_base.db.DaoSession;
 
-public class BaseApplication extends Application {
-    private static final String TAG = "BaseApplication";
+public class BaseApp extends Application {
+    private static final String TAG = "BaseApp";
 
     private static Context mContext;
 
@@ -31,7 +31,6 @@ public class BaseApplication extends Application {
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
-        mContext = getApplicationContext();
         //MultiDex分包方法 必须最先初始化
         MultiDex.install(this);
     }
@@ -39,6 +38,7 @@ public class BaseApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        mContext = getApplicationContext();
         initArouter();
         initGreenDao();
 

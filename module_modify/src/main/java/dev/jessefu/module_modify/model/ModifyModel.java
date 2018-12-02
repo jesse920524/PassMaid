@@ -1,8 +1,6 @@
 package dev.jessefu.module_modify.model;
 
-import java.util.Objects;
-
-import dev.jessefu.component_base.base.BaseApplication;
+import dev.jessefu.component_base.base.BaseApp;
 import dev.jessefu.component_base.base.BaseModel;
 import dev.jessefu.component_base.db.AccountEntityDao;
 import dev.jessefu.component_base.db.entity.AccountEntity;
@@ -17,7 +15,7 @@ public class ModifyModel extends BaseModel {
     private AccountEntityDao mAccountEntityDao;
 
     public ModifyModel(){
-        mAccountEntityDao = BaseApplication.getDaoSession().getAccountEntityDao();
+        mAccountEntityDao = BaseApp.getDaoSession().getAccountEntityDao();
     }
 
     /**插入或新增一条数据

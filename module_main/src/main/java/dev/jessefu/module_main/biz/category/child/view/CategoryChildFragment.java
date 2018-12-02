@@ -1,4 +1,4 @@
-package dev.jessefu.module_main.biz.category.view;
+package dev.jessefu.module_main.biz.category.child.view;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
@@ -25,7 +25,7 @@ import dev.jessefu.component_base.router.Router;
 import dev.jessefu.module_main.R;
 import dev.jessefu.module_main.R2;
 import dev.jessefu.module_main.adapter.RvStarAdapter;
-import dev.jessefu.module_main.biz.category.vm.CategoryChildVM;
+import dev.jessefu.module_main.biz.category.child.vm.CategoryChildVM;
 
 /**
  * Category子Fragment*/

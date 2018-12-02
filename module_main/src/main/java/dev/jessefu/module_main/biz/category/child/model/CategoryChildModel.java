@@ -1,9 +1,8 @@
-package dev.jessefu.module_main.biz.category.model;
+package dev.jessefu.module_main.biz.category.child.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import dev.jessefu.component_base.base.BaseApplication;
+import dev.jessefu.component_base.base.BaseApp;
 import dev.jessefu.component_base.base.BaseModel;
 import dev.jessefu.component_base.db.AccountEntityDao;
 import dev.jessefu.component_base.db.entity.AccountEntity;
@@ -15,7 +14,7 @@ public class CategoryChildModel extends BaseModel {
     private AccountEntityDao mAccountEntityDao;
 
     public CategoryChildModel(){
-        mAccountEntityDao = BaseApplication.getDaoSession().getAccountEntityDao();
+        mAccountEntityDao = BaseApp.getDaoSession().getAccountEntityDao();
     }
 
     /**从db读取指定category的数据

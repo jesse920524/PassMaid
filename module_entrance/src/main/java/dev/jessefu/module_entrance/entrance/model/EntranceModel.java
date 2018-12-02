@@ -1,29 +1,16 @@
 package dev.jessefu.module_entrance.entrance.model;
 
-import android.database.DefaultDatabaseErrorHandler;
-import android.util.Log;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.concurrent.Callable;
-
-import dev.jessefu.component_base.base.BaseApplication;
+import dev.jessefu.component_base.base.BaseApp;
 import dev.jessefu.component_base.base.BaseModel;
 import dev.jessefu.component_base.db.CategoryEntityDao;
-import dev.jessefu.component_base.db.DaoMaster;
-import dev.jessefu.component_base.db.DaoSession;
 import dev.jessefu.component_base.db.entity.CategoryEntity;
 import dev.jessefu.component_base.enums.DefaultCategory;
-import dev.jessefu.component_base.util.RxTransformer;
+import dev.jessefu.component_base.sp.SpConstants;
 import dev.jessefu.component_base.util.SPUtils;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.ObservableSource;
-import io.reactivex.Scheduler;
-import io.reactivex.functions.BiConsumer;
-import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
@@ -33,14 +20,21 @@ public class EntranceModel extends BaseModel {
     private CategoryEntityDao categoryEntityDao;
 
     public EntranceModel(){
-        categoryEntityDao = BaseApplication.getDaoSession().getCategoryEntityDao();
+        categoryEntityDao = BaseApp.getDaoSession().getCategoryEntityDao();
     }
 
     /**@return true if user first time open the app
      * false otherwise
      * */
     public boolean isFirstUse(){
-        return false;
+
+        return !SPUtils.getInstance(SpConstants.ModuleBase.SP_FIRST_USE)
+                .getBoolean(SpConstants.ModuleBase.SP_FIRST_USE_KEY);
+    }
+
+    public void handleFirstUse(){
+        SPUtils.getInstance(SpConstants.ModuleBase.SP_FIRST_USE)
+                .put(SpConstants.ModuleBase.SP_FIRST_USE_KEY, true);
     }
 
     /**init default account categories.
@@ -71,4 +65,5 @@ public class EntranceModel extends BaseModel {
            }).subscribeOn(Schedulers.io());
 
     }
+
 }

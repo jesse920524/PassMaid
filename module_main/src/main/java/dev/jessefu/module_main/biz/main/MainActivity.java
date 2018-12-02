@@ -33,7 +33,7 @@ import dev.jessefu.component_base.router.RouterConstants;
 import dev.jessefu.module_main.R;
 import dev.jessefu.module_main.R2;
 import dev.jessefu.module_main.adapter.AHViewPagerAdapter;
-import dev.jessefu.module_main.biz.category.view.CategoryFragment;
+import dev.jessefu.module_main.biz.category.parent.view.CategoryParentFragment;
 
 @Route(path = RouterConstants.ModuleMain.ACTIVITY_MAIN)
 public class MainActivity extends BaseActivity {
@@ -102,7 +102,7 @@ public class MainActivity extends BaseActivity {
 
     private void initTabLayout() {
 
-        CategoryFragment fragment = (CategoryFragment) mViewPagerAdapter.getItem(1);
+        CategoryParentFragment fragment = (CategoryParentFragment) mViewPagerAdapter.getItem(1);
         mTabLayout.setupWithViewPager(fragment.getViewPager());
     }
 

@@ -9,9 +9,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-import dev.jessefu.module_main.biz.category.view.CategoryFragment;
 import dev.jessefu.module_main.biz.main.FragmentMainFactory;
-import dev.jessefu.module_main.biz.star.view.StarFragment;
 
 public class AHViewPagerAdapter extends FragmentPagerAdapter {
     private static final String TAG = "AHViewPagerAdapter";

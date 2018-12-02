@@ -29,6 +29,7 @@ public class ModifyVM extends BaseViewModel<ModifyModel> {
         liveDataFinish = new MutableLiveData<>();
         liveDataFinish.setValue(false);
     }
+
     @Override
     public void start() {
 
@@ -58,6 +59,7 @@ public class ModifyVM extends BaseViewModel<ModifyModel> {
         insertOrUpdateEntity(entity);
 
     }
+
     public void insertOrUpdateEntity(AccountEntity entity){
         model.insertOrUpdateEntity(entity)
                 .subscribe(new Consumer<Boolean>() {

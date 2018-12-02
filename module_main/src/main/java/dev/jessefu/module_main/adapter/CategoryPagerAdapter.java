@@ -8,8 +8,9 @@ import android.support.v4.app.FragmentPagerAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
+import dev.jessefu.component_base.db.entity.CategoryEntity;
 import dev.jessefu.component_base.enums.DefaultCategory;
-import dev.jessefu.module_main.biz.category.FragmentCategoryChildFactory;
+import dev.jessefu.module_main.biz.category.child.CategoryChildFactory;
 
 public class CategoryPagerAdapter extends FragmentPagerAdapter {
     private static final String TAG = "CategoryPagerAdapter";
@@ -17,17 +18,18 @@ public class CategoryPagerAdapter extends FragmentPagerAdapter {
     private List<Fragment> fragmentList;
     private List<String> titleList;
 
-    public CategoryPagerAdapter(FragmentManager fm) {
+    public CategoryPagerAdapter(FragmentManager fm, List<CategoryEntity>List<CategoryEntity> categoryEntities) {
         super(fm);
         titleList = new ArrayList<>();
         fragmentList = new ArrayList<>();
         fragmentList.clear();
 
-        fragmentList.add(FragmentCategoryChildFactory.create("全部"));
+        // TODO: 2018-12-02 init categories
+        fragmentList.add(CategoryChildFactory.create("全部"));
         titleList.add("全部");
         for (DefaultCategory defaultCategory :
                 DefaultCategory.values()) {
-            fragmentList.add(FragmentCategoryChildFactory.create(defaultCategory.getName()));
+            fragmentList.add(CategoryChildFactory.create(defaultCategory.getName()));
             titleList.add(defaultCategory.getName());
         }
     }

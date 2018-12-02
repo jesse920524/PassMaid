@@ -1,36 +1,40 @@
-package dev.jessefu.module_main.biz.category.view;
+package dev.jessefu.module_main.biz.category.parent.view;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.List;
+
 import butterknife.BindView;
 import dev.jessefu.component_base.base.BaseFragment;
+import dev.jessefu.component_base.db.entity.CategoryEntity;
 import dev.jessefu.component_base.event.InitTabEvent;
 import dev.jessefu.module_main.R;
 import dev.jessefu.module_main.R2;
 import dev.jessefu.module_main.adapter.CategoryPagerAdapter;
+import dev.jessefu.module_main.biz.category.parent.vm.CategoryParentVM;
 
-public class CategoryFragment extends BaseFragment {
-    private static final String TAG = "CategoryFragment";
+public class CategoryParentFragment extends BaseFragment {
+    private static final String TAG = "CategoryParentFragment";
 
-    public static CategoryFragment newInstance(String arg){
+    public static CategoryParentFragment newInstance(String arg){
         Bundle bundle = new Bundle();
         bundle.putString(BaseFragment.FRAGMENT_ARGUMENT, arg);
-        CategoryFragment instance = new CategoryFragment();
+        CategoryParentFragment instance = new CategoryParentFragment();
         instance.setArguments(bundle);
         return instance;
     }
 
     @BindView(R2.id.vp_category)
     ViewPager mViewPager;
+
+    private CategoryParentVM mViewModel;
 
     private CategoryPagerAdapter mViewPagerAdapter;
 
@@ -41,13 +45,20 @@ public class CategoryFragment extends BaseFragment {
 
     @Override
     protected void initViews(View view) {
-        mViewPagerAdapter = new CategoryPagerAdapter(getActivity().getSupportFragmentManager());
-        mViewPager.setAdapter(mViewPagerAdapter);
+
     }
 
     @Override
     protected void initViewModel() {
-        //no vm
+        mViewModel = ViewModelProviders.of(this)
+                .get(CategoryParentVM.class);
+        mViewModel.getLiveDataCategoryList().observe(this, new Observer<List<CategoryEntity>>() {
+            @Override
+            public void onChanged(@Nullable List<CategoryEntity> categoryEntities) {
+                mViewPagerAdapter = new CategoryPagerAdapter(getActivity().getSupportFragmentManager(), categoryEntities);
+                mViewPager.setAdapter(mViewPagerAdapter);
+            }
+        });
     }
 
     @Override

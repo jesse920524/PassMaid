@@ -2,7 +2,7 @@ package dev.jessefu.module_main.biz.star.model;
 
 import java.util.List;
 
-import dev.jessefu.component_base.base.BaseApplication;
+import dev.jessefu.component_base.base.BaseApp;
 import dev.jessefu.component_base.base.BaseModel;
 import dev.jessefu.component_base.db.AccountEntityDao;
 import dev.jessefu.component_base.db.entity.AccountEntity;
@@ -17,7 +17,7 @@ public class StarModel extends BaseModel implements IStarModel{
 
     public StarModel(){
         super();
-        mAccountEntityDao = BaseApplication.getDaoSession().getAccountEntityDao();
+        mAccountEntityDao = BaseApp.getDaoSession().getAccountEntityDao();
     }
     @Override
     public Observable<List<AccountEntity>> getEntityList() {
