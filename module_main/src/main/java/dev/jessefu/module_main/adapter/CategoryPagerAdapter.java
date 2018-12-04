@@ -18,7 +18,7 @@ public class CategoryPagerAdapter extends FragmentPagerAdapter {
     private List<Fragment> fragmentList;
     private List<String> titleList;
 
-    public CategoryPagerAdapter(FragmentManager fm, List<CategoryEntity>List<CategoryEntity> categoryEntities) {
+    public CategoryPagerAdapter(FragmentManager fm, List<CategoryEntity> categoryEntities) {
         super(fm);
         titleList = new ArrayList<>();
         fragmentList = new ArrayList<>();
@@ -27,11 +27,16 @@ public class CategoryPagerAdapter extends FragmentPagerAdapter {
         // TODO: 2018-12-02 init categories
         fragmentList.add(CategoryChildFactory.create("全部"));
         titleList.add("全部");
-        for (DefaultCategory defaultCategory :
-                DefaultCategory.values()) {
-            fragmentList.add(CategoryChildFactory.create(defaultCategory.getName()));
-            titleList.add(defaultCategory.getName());
+        for (CategoryEntity c :
+                categoryEntities) {
+            fragmentList.add(CategoryChildFactory.create(c.getName()));
+            titleList.add(c.getName());
         }
+//        for (DefaultCategory defaultCategory :
+//                DefaultCategory.values()) {
+//            fragmentList.add(CategoryChildFactory.create(defaultCategory.getName()));
+//            titleList.add(defaultCategory.getName());
+//        }
     }
 
     @Override

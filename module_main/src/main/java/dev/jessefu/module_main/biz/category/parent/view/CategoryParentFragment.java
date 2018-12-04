@@ -63,6 +63,7 @@ public class CategoryParentFragment extends BaseFragment {
 
     @Override
     protected void initData() {
+        mViewModel.start();
         EventBus.getDefault().postSticky(InitTabEvent.newInstance(""));
     }
 
