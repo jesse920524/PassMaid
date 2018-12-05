@@ -9,5 +9,8 @@
 
         <activity android:name=".biz.main.MainActivity"
             android:launchMode="singleTask"></activity>
+
+        <activity android:name=".biz.category.choose.view.CategoryChooseActivity">
+        </activity>
     </application>
 </manifest>

@@ -32,4 +32,39 @@ public class CategoryChooseModel extends BaseModel {
             }
         }).compose(RxTransformer.switchSchedulers());
     }
+
+    /**check wether category name already exists in the db
+     *
+     * @param name the name of category
+     *
+     * @return true : no duplicate row in the db
+     *      false : duplicate row exists.
+     */
+    public Observable<Boolean> checkDuplicate(String name){
+        return Observable.create(new ObservableOnSubscribe<Boolean>() {
+            @Override
+            public void subscribe(ObservableEmitter<Boolean> emitter) throws Exception {
+                int size = categoryEntityDao.queryBuilder().where(CategoryEntityDao.Properties.Name.eq(name))
+                        .list().size();
+                if (size == 0){
+                    emitter.onNext(true);
+                }else{
+                    emitter.onError(new Exception("category name duplicate!"));
+                }
+            }
+        }).compose(RxTransformer.switchSchedulers());
+
+    }
+    
+    /** insert one row in the db
+     * 
+     * 1st: checkDuplicate 
+     * 2nd: insert into db
+     * 
+     * */
+    public void insert(String name){
+        // TODO: 2018-12-05       
+    }
+    
+    
 }
