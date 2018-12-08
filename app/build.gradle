@@ -17,6 +17,8 @@ android {
 
         javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
 
+
+
         /**签名配置*/
         signingConfigs {
             //签名配置

@@ -117,13 +117,14 @@ public class ModifyActivity extends BaseActivity {
     @OnClick(R2.id.ll_modify_category)
     public void onClickCategory(View view){
         Log.d(TAG, "onClick: exec");
-        CategoryChooseFragment.newInstance(new CategoryChooseFragment.OnCategoryCheckedListener() {
-            @Override
-            public void onCategoryChecked(DialogFragment dialogFragment, String categoryName) {
-                dialogFragment.dismiss();
-                mTvCategory.setText(categoryName);
-            }
-        }).show(getSupportFragmentManager(), CategoryChooseFragment.class.getSimpleName());
+        Router.INSTANCE.toCategoryChooseActivity();
+//        CategoryChooseFragment.newInstance(new CategoryChooseFragment.OnCategoryCheckedListener() {
+//            @Override
+//            public void onCategoryChecked(DialogFragment dialogFragment, String categoryName) {
+//                dialogFragment.dismiss();
+//                mTvCategory.setText(categoryName);
+//            }
+//        }).show(getSupportFragmentManager(), CategoryChooseFragment.class.getSimpleName());
     }
 
     @OnClick(R2.id.iv_modify_cancel)

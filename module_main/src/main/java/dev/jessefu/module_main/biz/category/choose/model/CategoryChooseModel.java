@@ -1,5 +1,7 @@
 package dev.jessefu.module_main.biz.category.choose.model;
 
+import android.util.Log;
+
 import java.util.List;
 
 import dev.jessefu.component_base.base.BaseApp;
@@ -7,9 +9,14 @@ import dev.jessefu.component_base.base.BaseModel;
 import dev.jessefu.component_base.db.CategoryEntityDao;
 import dev.jessefu.component_base.db.entity.CategoryEntity;
 import dev.jessefu.component_base.util.RxTransformer;
+import dev.jessefu.component_base.util.ToastUtil;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.ObservableSource;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
 
 public class CategoryChooseModel extends BaseModel {
     private static final String TAG = "CategoryChooseModel";
@@ -62,8 +69,39 @@ public class CategoryChooseModel extends BaseModel {
      * 2nd: insert into db
      * 
      * */
-    public void insert(String name){
-        // TODO: 2018-12-05       
+    public void insert(final String name){
+        Observable.create(new ObservableOnSubscribe<String>() {
+            @Override
+            public void subscribe(ObservableEmitter<String> emitter) throws Exception {
+                int size = categoryEntityDao.queryBuilder().where(CategoryEntityDao.Properties.Name.eq(name))
+                        .list().size();
+                if (size == 0){
+                    emitter.onNext(name);
+                }else{
+                    emitter.onError(new Exception("category name duplicate!"));
+                }
+            }
+        }).subscribeOn(Schedulers.io())
+              .doOnNext(new Consumer<String>() {
+                  @Override
+                  public void accept(String s) throws Exception {
+                      CategoryEntity categoryEntity = new CategoryEntity();
+                      categoryEntity.setName(s);
+                      categoryEntityDao.insert(new CategoryEntity());
+                  }
+              }).compose(RxTransformer.switchSchedulers())
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(String s) throws Exception {
+                        Log.d(TAG, "accept: " + name);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        Log.d(TAG, "accept: " + throwable.getLocalizedMessage());
+                        ToastUtil.showShort(throwable.getLocalizedMessage());
+                    }
+                });
     }
     
     

@@ -17,6 +17,8 @@ public final class RouterConstants {
 
         public static final String ACTIVITY_MAIN = PATH + "activity_main";
 
+        public static final String ACTIVITY_CHOOSE_CATEGORY = PATH + "activity_choose_category";
+
     }
 
     public static class ModuleAbout{

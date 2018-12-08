@@ -48,6 +48,10 @@ public enum Router {
         mARouter.build(RouterConstants.ModuleMain.ACTIVITY_MAIN).navigation();
     }
 
+    public void toCategoryChooseActivity(){
+        mARouter.build(RouterConstants.ModuleMain.ACTIVITY_CHOOSE_CATEGORY).navigation();
+    }
+
     /**module modify section*/
     public void toModifyActivity(AccountEntity accountEntity){
         mARouter.build(RouterConstants.ModuleModify.ACTIVITY_MODIFY)

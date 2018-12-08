@@ -46,7 +46,7 @@ public class RvStarAdapter extends BaseQuickAdapter<AccountEntity, RvStarAdapter
 
         /**textDrawable*/
         char[] chars = item.getTitle().toCharArray();
-        String firstLetter = String.valueOf(chars[0]);
+        String firstLetter = String.valueOf(chars[0]).toUpperCase();
 
         ColorGenerator colorGenerator = ColorGenerator.MATERIAL;
         TextDrawable textDrawable = TextDrawable.builder()

@@ -52,6 +52,12 @@ public class CategoryParentFragment extends BaseFragment {
     protected void initViewModel() {
         mViewModel = ViewModelProviders.of(this)
                 .get(CategoryParentVM.class);
+
+    }
+
+    @Override
+    protected void initData() {
+        mViewModel.start();
         mViewModel.getLiveDataCategoryList().observe(this, new Observer<List<CategoryEntity>>() {
             @Override
             public void onChanged(@Nullable List<CategoryEntity> categoryEntities) {
@@ -59,11 +65,6 @@ public class CategoryParentFragment extends BaseFragment {
                 mViewPager.setAdapter(mViewPagerAdapter);
             }
         });
-    }
-
-    @Override
-    protected void initData() {
-        mViewModel.start();
         EventBus.getDefault().postSticky(InitTabEvent.newInstance(""));
     }
 

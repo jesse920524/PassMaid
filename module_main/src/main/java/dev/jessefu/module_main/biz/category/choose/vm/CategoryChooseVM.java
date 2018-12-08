@@ -25,6 +25,10 @@ public class CategoryChooseVM extends BaseViewModel<CategoryChooseModel> {
 
     @Override
     public void start() {
+        getCategoryList();
+    }
+
+    private void getCategoryList(){
         model.getCategoryList()
                 .subscribe(new Consumer<List<CategoryEntity>>() {
                     @Override
@@ -42,4 +46,6 @@ public class CategoryChooseVM extends BaseViewModel<CategoryChooseModel> {
     public MutableLiveData<List<CategoryEntity>> getLiveDataCategoryList() {
         return liveDataCategoryList;
     }
+
+
 }
