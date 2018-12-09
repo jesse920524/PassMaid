@@ -1,5 +1,7 @@
 package dev.jessefu.component_base.util;
 
+import android.support.annotation.NonNull;
+
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.amulyakhare.textdrawable.util.ColorGenerator;
 
@@ -13,8 +15,8 @@ public final class TextDrawableUtil {
      * @param text
      *
      * @return */
-    public static TextDrawable generate(String text){
-        /**textDrawable*/
+    public static TextDrawable generate(@NonNull String text){
+
         char[] chars = text.toCharArray();
         String firstLetter = String.valueOf(chars[0]).toUpperCase();
 

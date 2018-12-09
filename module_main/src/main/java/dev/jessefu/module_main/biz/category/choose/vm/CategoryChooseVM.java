@@ -2,9 +2,11 @@ package dev.jessefu.module_main.biz.category.choose.vm;
 
 import android.arch.lifecycle.MutableLiveData;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.List;
 
+import dev.jessefu.component_base.base.BaseApp;
 import dev.jessefu.component_base.base.BaseViewModel;
 import dev.jessefu.component_base.db.entity.CategoryEntity;
 import dev.jessefu.module_main.biz.category.choose.model.CategoryChooseModel;
@@ -39,6 +41,26 @@ public class CategoryChooseVM extends BaseViewModel<CategoryChooseModel> {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
                         Log.d(TAG, "accept: " + throwable.getLocalizedMessage());
+                    }
+                });
+    }
+
+    public void addCategory(String categoryName){
+        model.insert(categoryName)
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(String s) throws Exception {
+                        CategoryEntity categoryEntity = new CategoryEntity();
+                        categoryEntity.setName(s);
+
+                        List<CategoryEntity> list = liveDataCategoryList.getValue();
+                        list.add(categoryEntity);
+                        liveDataCategoryList.setValue(list);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        Toast.makeText(BaseApp.getContext(), throwable.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
     }

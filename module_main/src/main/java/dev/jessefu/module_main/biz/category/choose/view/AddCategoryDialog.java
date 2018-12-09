@@ -17,6 +17,7 @@ import org.greenrobot.eventbus.EventBus;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import dev.jessefu.component_base.event.AddCategoryEvent;
+import dev.jessefu.component_base.util.ScreenUtils;
 import dev.jessefu.module_main.R;
 import dev.jessefu.module_main.R2;
 
@@ -47,13 +48,20 @@ public class AddCategoryDialog extends DialogFragment {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        getDialog().getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT,
+                ScreenUtils.getScreenHeight()/3);
+    }
+
+    @Override
     public void onDestroy() {
         super.onDestroy();
     }
 
     private void initViews() {
         mBtnConfirm.setOnClickListener(new BtnConfirmListener());
-        // TODO: 2018-12-08 btnCancel handing
+        mBtnCancel.setOnClickListener(new BtnCancelListener());
     }
 
     protected class BtnConfirmListener implements View.OnClickListener{
@@ -61,6 +69,7 @@ public class AddCategoryDialog extends DialogFragment {
         @Override
         public void onClick(View v) {
             final String sInput = mEtName.getText().toString();
+
             if (TextUtils.isEmpty(sInput)){
                 Toast.makeText(getContext(), "分类名称不能为空!", Toast.LENGTH_SHORT).show();
             }else if (sInput.length() > 10){
@@ -69,6 +78,15 @@ public class AddCategoryDialog extends DialogFragment {
                 dismiss();
                 EventBus.getDefault().post(AddCategoryEvent.newInstance(sInput));
             }
+
+        }
+    }
+
+    protected class BtnCancelListener implements View.OnClickListener{
+
+        @Override
+        public void onClick(View v) {
+            dismiss();
         }
     }
 }

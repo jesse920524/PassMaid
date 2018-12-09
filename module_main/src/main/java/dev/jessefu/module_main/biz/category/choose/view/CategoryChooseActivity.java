@@ -7,6 +7,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -104,7 +105,7 @@ public class CategoryChooseActivity extends BaseActivity {
                 .subscribe(new Consumer<Boolean>() {
                     @Override
                     public void accept(Boolean aBoolean) throws Exception {
-                        Toast.makeText(CategoryChooseActivity.this, "should show a dialog", Toast.LENGTH_SHORT).show();
+                        AddCategoryDialog.newInstance().show(getSupportFragmentManager(), "");
                     }
                 }, new Consumer<Throwable>() {
                     @Override
@@ -133,6 +134,6 @@ public class CategoryChooseActivity extends BaseActivity {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventAddCategory(AddCategoryEvent event){
-        // TODO: 2018-12-08 add event handling
+        mViewModel.addCategory(event.getMsg());
     }
 }

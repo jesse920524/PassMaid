@@ -34,7 +34,6 @@ public class CategoryChooseModel extends BaseModel {
             public void subscribe(ObservableEmitter<List<CategoryEntity>> emitter) throws Exception {
                 List<CategoryEntity> list = categoryEntityDao.queryBuilder()
                         .list();
-
                 emitter.onNext(list);
             }
         }).compose(RxTransformer.switchSchedulers());
@@ -69,8 +68,8 @@ public class CategoryChooseModel extends BaseModel {
      * 2nd: insert into db
      * 
      * */
-    public void insert(final String name){
-        Observable.create(new ObservableOnSubscribe<String>() {
+    public Observable<String> insert(final String name){
+        return Observable.create(new ObservableOnSubscribe<String>() {
             @Override
             public void subscribe(ObservableEmitter<String> emitter) throws Exception {
                 int size = categoryEntityDao.queryBuilder().where(CategoryEntityDao.Properties.Name.eq(name))
@@ -87,21 +86,10 @@ public class CategoryChooseModel extends BaseModel {
                   public void accept(String s) throws Exception {
                       CategoryEntity categoryEntity = new CategoryEntity();
                       categoryEntity.setName(s);
-                      categoryEntityDao.insert(new CategoryEntity());
+                      categoryEntityDao.insert(categoryEntity);
                   }
-              }).compose(RxTransformer.switchSchedulers())
-                .subscribe(new Consumer<String>() {
-                    @Override
-                    public void accept(String s) throws Exception {
-                        Log.d(TAG, "accept: " + name);
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        Log.d(TAG, "accept: " + throwable.getLocalizedMessage());
-                        ToastUtil.showShort(throwable.getLocalizedMessage());
-                    }
-                });
+              }).compose(RxTransformer.switchSchedulers());
+
     }
     
     
