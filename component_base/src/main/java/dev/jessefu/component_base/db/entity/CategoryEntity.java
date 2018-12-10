@@ -5,6 +5,8 @@ import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Unique;
 import org.greenrobot.greendao.annotation.Generated;
 
+import io.reactivex.SingleSource;
+
 /**代表帐户分类*/
 @Entity
 public class CategoryEntity {

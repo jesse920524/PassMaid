@@ -4,7 +4,6 @@ import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -19,15 +18,18 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
 import dev.jessefu.component_base.base.BaseActivity;
 import dev.jessefu.component_base.db.entity.CategoryEntity;
+import dev.jessefu.component_base.enums.DefaultCategory;
 import dev.jessefu.component_base.event.AddCategoryEvent;
+import dev.jessefu.component_base.event.DeleteCategoryEvent;
 import dev.jessefu.component_base.router.RouterConstants;
 import dev.jessefu.component_base.util.RxTransformer;
-import dev.jessefu.component_base.util.ToastUtil;
 import dev.jessefu.module_main.R;
 import dev.jessefu.module_main.R2;
 import dev.jessefu.module_main.adapter.RvCategoryChooseAdapter;
@@ -35,7 +37,13 @@ import dev.jessefu.module_main.biz.category.choose.vm.CategoryChooseVM;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.Single;
+import io.reactivex.SingleEmitter;
+import io.reactivex.SingleOnSubscribe;
+import io.reactivex.SingleSource;
+import io.reactivex.functions.BiConsumer;
 import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
 
 @Route(path= RouterConstants.ModuleMain.ACTIVITY_CHOOSE_CATEGORY)
 public class CategoryChooseActivity extends BaseActivity {
@@ -76,9 +84,8 @@ public class CategoryChooseActivity extends BaseActivity {
         mAdapter.setOnItemLongClickListener(new BaseQuickAdapter.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(BaseQuickAdapter adapter, View view, int position) {
-                // TODO: 2018-12-05 alert : modify name || delete
-
-                return false;
+                handleItemLongClick(adapter, position);
+                return true;
             }
         });
         mRecyclerView.setLayoutManager(layoutManager);
@@ -89,6 +96,25 @@ public class CategoryChooseActivity extends BaseActivity {
                 addCategory();
             }
         });
+        mIvBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
+
+    private void handleItemLongClick(BaseQuickAdapter adapter, int position) {
+        Observable.fromArray(DefaultCategory.values())
+                .map(defaultCategory -> defaultCategory.getName()).collectInto(new ArrayList<String>(),
+                (strings, s) -> strings.add(s)).map(strings -> {
+            CategoryEntity data = (CategoryEntity) adapter.getData().get(position);
+            if (strings.contains(data.getName()))
+                throw new Exception("default category could not be deleted.");
+
+            return data.getName();
+        }).subscribe(s -> LongClickCategoryDialog.newInstance(s).show(getSupportFragmentManager(), ""),
+                throwable -> Log.d(TAG, "accept: " + throwable.getLocalizedMessage()));
     }
 
     private void addCategory() {
@@ -135,5 +161,10 @@ public class CategoryChooseActivity extends BaseActivity {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventAddCategory(AddCategoryEvent event){
         mViewModel.addCategory(event.getMsg());
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventDeleteCategory(DeleteCategoryEvent event){
+//        mViewModel.
     }
 }

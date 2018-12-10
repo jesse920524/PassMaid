@@ -1,5 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+<RelativeLayout
+    android:id="@+id/rl_dflc_root"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/iv_dflc_icon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="18dp"
+        android:src="@mipmap/ic_delete_grey600_48dp"/>
+
+    <TextView
+        android:id="@+id/tv_dflc_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="删除"
+        android:textSize="18sp"
+        android:layout_toRightOf="@id/iv_dflc_icon"
+        android:layout_centerVertical="true"
+        />
 
 </RelativeLayout>
