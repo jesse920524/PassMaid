@@ -165,6 +165,6 @@ public class CategoryChooseActivity extends BaseActivity {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventDeleteCategory(DeleteCategoryEvent event){
-//        mViewModel.
+        mViewModel.removeCategory(event.getMsg());
     }
 }

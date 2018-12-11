@@ -65,6 +65,21 @@ public class CategoryChooseVM extends BaseViewModel<CategoryChooseModel> {
                 });
     }
 
+    public void removeCategory(String categoryName){
+        model.deleteCategory(categoryName)
+                .subscribe(new Consumer<Boolean>() {
+                    @Override
+                    public void accept(Boolean aBoolean) throws Exception {
+                        // TODO: 2018-12-11 handle delete success
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        // TODO: 2018-12-11 handle delete fail
+                    }
+                });
+    }
+
     public MutableLiveData<List<CategoryEntity>> getLiveDataCategoryList() {
         return liveDataCategoryList;
     }
