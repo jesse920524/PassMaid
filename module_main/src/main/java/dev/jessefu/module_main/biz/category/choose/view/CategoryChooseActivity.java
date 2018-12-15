@@ -2,6 +2,7 @@ package dev.jessefu.module_main.biz.category.choose.view;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.GridLayoutManager;
@@ -19,7 +20,6 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
@@ -37,13 +37,7 @@ import dev.jessefu.module_main.biz.category.choose.vm.CategoryChooseVM;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.Single;
-import io.reactivex.SingleEmitter;
-import io.reactivex.SingleOnSubscribe;
-import io.reactivex.SingleSource;
-import io.reactivex.functions.BiConsumer;
 import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Function;
 
 @Route(path= RouterConstants.ModuleMain.ACTIVITY_CHOOSE_CATEGORY)
 public class CategoryChooseActivity extends BaseActivity {
@@ -60,6 +54,7 @@ public class CategoryChooseActivity extends BaseActivity {
     private RecyclerView.LayoutManager layoutManager;
     private RvCategoryChooseAdapter mAdapter;
 
+    private LongClickCategoryDialog longClickDialog;
     @Override
     protected void onStart() {
         super.onStart();
@@ -81,6 +76,19 @@ public class CategoryChooseActivity extends BaseActivity {
     protected void initViews() {
         layoutManager = new GridLayoutManager(this, 2);
         mAdapter = new RvCategoryChooseAdapter();
+        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                // TODO: 2018-12-15 set result for intent and finish;
+                CategoryEntity entity = (CategoryEntity) adapter.getData().get(position);
+
+                Intent intent = new Intent();
+                intent.putExtra(RouterConstants.ModuleMain.CATEGORY_KEY, entity.getName());
+
+                setResult(RouterConstants.ModuleModify.RESULT_CODE, intent);
+                finish();
+            }
+        });
         mAdapter.setOnItemLongClickListener(new BaseQuickAdapter.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(BaseQuickAdapter adapter, View view, int position) {
@@ -113,8 +121,19 @@ public class CategoryChooseActivity extends BaseActivity {
                 throw new Exception("default category could not be deleted.");
 
             return data.getName();
-        }).subscribe(s -> LongClickCategoryDialog.newInstance(s).show(getSupportFragmentManager(), ""),
-                throwable -> Log.d(TAG, "accept: " + throwable.getLocalizedMessage()));
+        }).subscribe(new Consumer<String>() {
+            @Override
+            public void accept(String s) throws Exception {
+                longClickDialog = LongClickCategoryDialog.newInstance(s);
+                longClickDialog.show(getSupportFragmentManager(), "");
+            }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) throws Exception {
+                Log.d(TAG, "accept: " + throwable.getLocalizedMessage());
+            }
+        });
+
     }
 
     private void addCategory() {
@@ -147,6 +166,7 @@ public class CategoryChooseActivity extends BaseActivity {
         mViewModel.getLiveDataCategoryList().observe(this, new Observer<List<CategoryEntity>>() {
             @Override
             public void onChanged(@Nullable List<CategoryEntity> categoryEntities) {
+                dismissDialog();
                 mAdapter.setNewData(categoryEntities);
             }
         });
@@ -156,6 +176,12 @@ public class CategoryChooseActivity extends BaseActivity {
     protected void initViewModel() {
         mViewModel = ViewModelProviders.of(this)
                 .get(CategoryChooseVM.class);
+    }
+
+    private void dismissDialog(){
+        if (longClickDialog == null) return;
+
+        longClickDialog.dismiss();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

@@ -122,15 +122,17 @@ public class CategoryChooseModel extends BaseModel {
                                 .where(AccountEntityDao.Properties.Category.eq(s))
                                 .list();
 
-                        if (list.size() > 0){
+                        if (list.isEmpty()) return;
+
                             for (AccountEntity entity :
                                     list) {
                                 entity.setCategory(DefaultCategory.OTHER.getName());
                                 accountEntityDao.save(entity);
                             }
-                        }
+
                     }
-                }).map(new Function<String, Boolean>() {
+                }).subscribeOn(Schedulers.io())
+                .map(new Function<String, Boolean>() {
             @Override
             public Boolean apply(String s) throws Exception {
                 CategoryEntity categoryEntity = categoryEntityDao.queryBuilder()

@@ -19,6 +19,9 @@ public final class RouterConstants {
 
         public static final String ACTIVITY_CHOOSE_CATEGORY = PATH + "activity_choose_category";
 
+        /**ChooseCategoryAct --> ModifyAct, key of setResult. */
+        public static final String CATEGORY_KEY = "category_key";
+
     }
 
     public static class ModuleAbout{
@@ -46,6 +49,10 @@ public final class RouterConstants {
 
         public static final String ACTIVITY_MODIFY_JSON = "activity_modify_json";
         public static final String ACTIVITY_MODIFY = PATH + "activity_modify";
+
+        /** requestCode && resultCode*/
+        public static final int REQUEST_CODE = 1024;
+        public static final int RESULT_CODE = 1025;
 
     }
 

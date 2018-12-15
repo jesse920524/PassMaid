@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
@@ -117,14 +118,7 @@ public class ModifyActivity extends BaseActivity {
     @OnClick(R2.id.ll_modify_category)
     public void onClickCategory(View view){
         Log.d(TAG, "onClick: exec");
-        Router.INSTANCE.toCategoryChooseActivity();
-//        CategoryChooseFragment.newInstance(new CategoryChooseFragment.OnCategoryCheckedListener() {
-//            @Override
-//            public void onCategoryChecked(DialogFragment dialogFragment, String categoryName) {
-//                dialogFragment.dismiss();
-//                mTvCategory.setText(categoryName);
-//            }
-//        }).show(getSupportFragmentManager(), CategoryChooseFragment.class.getSimpleName());
+        Router.INSTANCE.toCategoryChooseActivity(this, RouterConstants.ModuleModify.REQUEST_CODE, null);
     }
 
     @OnClick(R2.id.iv_modify_cancel)
@@ -166,5 +160,21 @@ public class ModifyActivity extends BaseActivity {
             }
         });
         builder.show();
+    }
+
+    /**CategoryChooseActivity could return category name.
+     * @param requestCode 1024
+     * @param resultCode 1025
+     * */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == RouterConstants.ModuleModify.REQUEST_CODE &&
+                resultCode == RouterConstants.ModuleModify.RESULT_CODE){
+            mTvCategory.setText(data.getStringExtra(RouterConstants.ModuleMain.CATEGORY_KEY));
+        }else {
+            Log.d(TAG, "onActivityResult: requestCode || resultCode error, or no result ");
+        }
+
     }
 }

@@ -1,5 +1,9 @@
 package dev.jessefu.component_base.router;
 
+import android.app.Activity;
+import android.support.annotation.NonNull;
+
+import com.alibaba.android.arouter.facade.callback.NavigationCallback;
 import com.alibaba.android.arouter.launcher.ARouter;
 
 import dev.jessefu.component_base.base.BaseActivity;
@@ -48,8 +52,11 @@ public enum Router {
         mARouter.build(RouterConstants.ModuleMain.ACTIVITY_MAIN).navigation();
     }
 
-    public void toCategoryChooseActivity(){
-        mARouter.build(RouterConstants.ModuleMain.ACTIVITY_CHOOSE_CATEGORY).navigation();
+    public void toCategoryChooseActivity(@NonNull Activity activity,
+                                         @NonNull int requestCode,
+                                         @NonNull NavigationCallback callback){
+        mARouter.build(RouterConstants.ModuleMain.ACTIVITY_CHOOSE_CATEGORY)
+                .navigation(activity, requestCode, callback);
     }
 
     /**module modify section*/

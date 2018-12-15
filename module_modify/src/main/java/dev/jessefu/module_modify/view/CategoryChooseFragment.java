@@ -17,7 +17,7 @@ import butterknife.ButterKnife;
 import dev.jessefu.component_base.enums.DefaultCategory;
 import dev.jessefu.module_modify.R;
 import dev.jessefu.module_modify.R2;
-
+@Deprecated
 public class CategoryChooseFragment extends DialogFragment {
     private static final String TAG = "CategoryChooseFragment";
 

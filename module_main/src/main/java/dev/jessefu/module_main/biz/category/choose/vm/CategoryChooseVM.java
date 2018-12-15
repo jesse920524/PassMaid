@@ -70,12 +70,31 @@ public class CategoryChooseVM extends BaseViewModel<CategoryChooseModel> {
                 .subscribe(new Consumer<Boolean>() {
                     @Override
                     public void accept(Boolean aBoolean) throws Exception {
-                        // TODO: 2018-12-11 handle delete success
+
+                        handleRemoveSucceed();
                     }
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        // TODO: 2018-12-11 handle delete fail
+                        Log.d(TAG, "accept: " + throwable.getLocalizedMessage());
+                        Toast.makeText(BaseApp.getContext(),
+                                "删除失败: " + throwable.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    private void handleRemoveSucceed() {
+        model.getCategoryList()
+                .subscribe(new Consumer<List<CategoryEntity>>() {
+                    @Override
+                    public void accept(List<CategoryEntity> categoryEntities) throws Exception {
+                        liveDataCategoryList.setValue(categoryEntities);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        Log.d(TAG, "accept: " + throwable.getLocalizedMessage());
+                        Toast.makeText(BaseApp.getContext(), throwable.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
     }
