@@ -6,6 +6,10 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/orange_500</item>
+
+        <!--toolbar 菜单项 图标颜色-->
+        <item name="android:textColorSecondary">@color/white</item>
+
     </style>
 
     <style name="ThemePassMaid" parent="android:Theme.Material.Light.NoActionBar" />

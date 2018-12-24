@@ -19,6 +19,13 @@ import dev.jessefu.module_main.R;
 import dev.jessefu.module_main.R2;
 import dev.jessefu.module_main.adapter.CategoryPagerAdapter;
 import dev.jessefu.module_main.biz.category.parent.vm.CategoryParentVM;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 public class CategoryParentFragment extends BaseFragment {
     private static final String TAG = "CategoryParentFragment";
