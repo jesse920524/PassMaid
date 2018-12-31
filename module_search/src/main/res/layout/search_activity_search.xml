@@ -11,7 +11,30 @@
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
         app:title="search"
-        app:titleTextColor="@color/white"></android.support.v7.widget.Toolbar>
+        app:titleTextColor="@color/white">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/iv_search_back"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/ic_keyboard_backspace_white_48dp"/>
+
+            <TextView
+                android:id="@+id/tv_search_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="search"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="12dp"
+                android:layout_toRightOf="@id/iv_search_back"/>
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_search"
